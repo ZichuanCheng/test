@@ -1,0 +1,873 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>PetCare Veterinary Clinic - 专业宠物医疗服务</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+    <link href="https://cdn.jsdelivr.net/npm/font-awesome@4.7.0/css/font-awesome.min.css" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Nunito+Sans:wght@300;400;500;600;700&family=Varela+Round&display=swap" rel="stylesheet">
+    <script>
+        tailwind.config = {
+            theme: {
+                extend: {
+                    colors: {
+                        primary: '#3B82F6',
+                        secondary: '#60A5FA',
+                        cta: '#F97316',
+                        background: '#F8FAFC',
+                        text: '#1E293B'
+                    },
+                    fontFamily: {
+                        'varela': ['Varela Round', 'sans-serif'],
+                        'nunito': ['Nunito Sans', 'sans-serif']
+                    },
+                    boxShadow: {
+                        'clay': '5px 5px 10px rgba(0, 0, 0, 0.1), -5px -5px 10px rgba(255, 255, 255, 0.8)',
+                        'clay-inset': 'inset 3px 3px 6px rgba(0, 0, 0, 0.1), inset -3px -3px 6px rgba(255, 255, 255, 0.8)'
+                    }
+                }
+            }
+        }
+    </script>
+    <style type="text/tailwindcss">
+        @layer utilities {
+            .claymorphism {
+                @apply bg-background rounded-2xl border-2 border-white/50 shadow-clay transition-all duration-300;
+            }
+            .claymorphism-inset {
+                @apply bg-background rounded-xl border border-gray-200 shadow-clay-inset;
+            }
+            .text-shadow {
+                text-shadow: 1px 1px 2px rgba(0, 0, 0, 0.1);
+            }
+            .hover-lift {
+                @apply hover:-translate-y-1 hover:shadow-lg transition-transform duration-300;
+            }
+        }
+    </style>
+</head>
+<body class="font-nunito bg-background text-text overflow-x-hidden">
+    <!-- 导航栏 -->
+    <nav class="fixed w-full top-4 left-0 right-0 z-50 px-4 md:px-8">
+        <div class="max-w-7xl mx-auto">
+            <div class="claymorphism px-6 py-4 flex items-center justify-between">
+                <!-- Logo -->
+                <div class="flex items-center space-x-3">
+                    <div class="claymorphism w-12 h-12 flex items-center justify-center">
+                        <i class="fa fa-paw text-primary text-2xl"></i>
+                    </div>
+                    <div>
+                        <h1 class="font-varela text-2xl font-bold text-primary">PetCare</h1>
+                        <p class="text-sm text-gray-600">Veterinary Clinic</p>
+                    </div>
+                </div>
+                
+                <!-- 桌面导航 -->
+                <div class="hidden md:flex items-center space-x-8">
+                    <a href="#home" class="font-varela text-lg font-medium text-primary hover:text-cta transition-colors">首页</a>
+                    <a href="#services" class="font-varela text-lg font-medium text-gray-700 hover:text-primary transition-colors">服务</a>
+                    <a href="#team" class="font-varela text-lg font-medium text-gray-700 hover:text-primary transition-colors">团队</a>
+                    <a href="#blog" class="font-varela text-lg font-medium text-gray-700 hover:text-primary transition-colors">博客</a>
+                    <a href="#contact" class="font-varela text-lg font-medium text-gray-700 hover:text-primary transition-colors">联系我们</a>
+                    <a href="#appointment" class="claymorphism px-6 py-3 font-varela font-bold text-white bg-cta hover:bg-orange-500 transition-colors">
+                        预约就诊
+                    </a>
+                </div>
+                
+                <!-- 移动端菜单按钮 -->
+                <div class="md:hidden">
+                    <button id="menu-toggle" class="claymorphism p-3 text-primary">
+                        <i class="fa fa-bars text-xl"></i>
+                    </button>
+                </div>
+            </div>
+            
+            <!-- 移动端导航菜单 -->
+            <div id="mobile-menu" class="hidden md:hidden mt-4 claymorphism px-6 py-4">
+                <div class="flex flex-col space-y-4">
+                    <a href="#home" class="font-varela text-lg font-medium text-primary hover:text-cta transition-colors py-2">首页</a>
+                    <a href="#services" class="font-varela text-lg font-medium text-gray-700 hover:text-primary transition-colors py-2">服务</a>
+                    <a href="#team" class="font-varela text-lg font-medium text-gray-700 hover:text-primary transition-colors py-2">团队</a>
+                    <a href="#blog" class="font-varela text-lg font-medium text-gray-700 hover:text-primary transition-colors py-2">博客</a>
+                    <a href="#contact" class="font-varela text-lg font-medium text-gray-700 hover:text-primary transition-colors py-2">联系我们</a>
+                    <a href="#appointment" class="claymorphism px-6 py-3 font-varela font-bold text-white bg-cta hover:bg-orange-500 transition-colors text-center">
+                        预约就诊
+                    </a>
+                </div>
+            </div>
+        </div>
+    </nav>
+
+    <main>
+        <!-- Hero区域 -->
+        <section id="home" class="pt-32 pb-20 px-4 md:px-8">
+            <div class="max-w-7xl mx-auto">
+                <div class="flex flex-col md:flex-row items-center space-y-12 md:space-y-0 md:space-x-12">
+                    <!-- 左侧文字 -->
+                    <div class="md:w-1/2 space-y-6">
+                        <h2 class="font-varela text-4xl md:text-5xl lg:text-6xl font-bold text-primary text-shadow leading-tight">
+                            专业的<br>宠物医疗服务
+                        </h2>
+                        <p class="text-lg text-gray-600 leading-relaxed">
+                            我们致力于为您的爱宠提供最优质的医疗护理，拥有经验丰富的兽医团队和先进的医疗设备，让您的宠物健康快乐地成长。
+                        </p>
+                        <div class="flex flex-col sm:flex-row space-y-4 sm:space-y-0 sm:space-x-4">
+                            <a href="#appointment" class="claymorphism px-8 py-4 font-varela font-bold text-white bg-cta hover:bg-orange-500 transition-colors text-center">
+                                立即预约
+                            </a>
+                            <a href="#services" class="claymorphism px-8 py-4 font-varela font-bold text-primary hover:bg-gray-100 transition-colors text-center">
+                                了解服务
+                            </a>
+                        </div>
+                        <!-- 信任标识 -->
+                        <div class="claymorphism-inset p-4 rounded-xl">
+                            <div class="flex items-center space-x-2">
+                                <div class="flex -space-x-2">
+                                    <img src="https://trae-api-cn.mchost.guru/api/ide/v1/text_to_image?prompt=happy%20pet%20owner%20portrait&image_size=square" alt="客户" class="w-10 h-10 rounded-full border-2 border-white">
+                                    <img src="https://trae-api-cn.mchost.guru/api/ide/v1/text_to_image?prompt=senior%20pet%20owner%20smiling&image_size=square" alt="客户" class="w-10 h-10 rounded-full border-2 border-white">
+                                    <img src="https://trae-api-cn.mchost.guru/api/ide/v1/text_to_image?prompt=young%20woman%20with%20pet&image_size=square" alt="客户" class="w-10 h-10 rounded-full border-2 border-white">
+                                </div>
+                                <div>
+                                    <div class="flex text-yellow-400">
+                                        <i class="fa fa-star"></i>
+                                        <i class="fa fa-star"></i>
+                                        <i class="fa fa-star"></i>
+                                        <i class="fa fa-star"></i>
+                                        <i class="fa fa-star"></i>
+                                    </div>
+                                    <p class="text-sm text-gray-600">来自500+宠物家庭的好评</p>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <!-- 右侧图片 -->
+                    <div class="md:w-1/2">
+                        <div class="claymorphism p-6 rounded-3xl">
+                            <img src="https://trae-api-cn.mchost.guru/api/ide/v1/text_to_image?prompt=professional%20veterinarian%20examining%20a%20dog%20in%20modern%20clinic&image_size=landscape_4_3" alt="兽医检查宠物" class="w-full h-auto rounded-2xl">
+                            <!-- 浮动元素 -->
+                            <div class="absolute -bottom-4 -right-4 claymorphism p-4 rounded-2xl">
+                                <div class="flex items-center space-x-3">
+                                    <div class="claymorphism w-12 h-12 flex items-center justify-center bg-green-100">
+                                        <i class="fa fa-heartbeat text-green-500 text-xl"></i>
+                                    </div>
+                                    <div>
+                                        <p class="font-varela font-bold text-green-500">健康保障</p>
+                                        <p class="text-sm text-gray-600">全方位体检</p>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- 服务介绍区域 -->
+        <section id="services" class="py-20 px-4 md:px-8 bg-gradient-to-b from-background to-blue-50">
+            <div class="max-w-7xl mx-auto">
+                <div class="text-center mb-16">
+                    <h2 class="font-varela text-3xl md:text-4xl font-bold text-primary text-shadow mb-4">
+                        我们的服务
+                    </h2>
+                    <p class="text-lg text-gray-600 max-w-3xl mx-auto">
+                        提供全方位的宠物医疗服务，从常规体检到复杂手术，我们都能为您的爱宠提供专业的护理。
+                    </p>
+                </div>
+                
+                <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+                    <!-- 服务卡片 1 -->
+                    <div class="claymorphism p-8 rounded-2xl hover-lift">
+                        <div class="claymorphism w-16 h-16 flex items-center justify-center bg-blue-100 mb-6">
+                            <i class="fa fa-stethoscope text-primary text-2xl"></i>
+                        </div>
+                        <h3 class="font-varela text-xl font-bold text-primary mb-4">常规体检</h3>
+                        <p class="text-gray-600 mb-6">
+                            定期体检有助于早期发现潜在健康问题，包括身体检查、疫苗接种、寄生虫检测等。
+                        </p>
+                        <a href="#" class="font-varela font-bold text-cta hover:text-orange-500 transition-colors flex items-center">
+                            了解更多 <i class="fa fa-arrow-right ml-2"></i>
+                        </a>
+                    </div>
+                    
+                    <!-- 服务卡片 2 -->
+                    <div class="claymorphism p-8 rounded-2xl hover-lift">
+                        <div class="claymorphism w-16 h-16 flex items-center justify-center bg-blue-100 mb-6">
+                            <i class="fa fa-medkit text-primary text-2xl"></i>
+                        </div>
+                        <h3 class="font-varela text-xl font-bold text-primary mb-4">疾病治疗</h3>
+                        <p class="text-gray-600 mb-6">
+                            针对各种宠物疾病提供专业治疗方案，包括内科、外科、皮肤科等多种疾病的诊断和治疗。
+                        </p>
+                        <a href="#" class="font-varela font-bold text-cta hover:text-orange-500 transition-colors flex items-center">
+                            了解更多 <i class="fa fa-arrow-right ml-2"></i>
+                        </a>
+                    </div>
+                    
+                    <!-- 服务卡片 3 -->
+                    <div class="claymorphism p-8 rounded-2xl hover-lift">
+                        <div class="claymorphism w-16 h-16 flex items-center justify-center bg-blue-100 mb-6">
+                            <i class="fa fa-scissors text-primary text-2xl"></i>
+                        </div>
+                        <h3 class="font-varela text-xl font-bold text-primary mb-4">美容护理</h3>
+                        <p class="text-gray-600 mb-6">
+                            提供专业的宠物美容服务，包括洗澡、剪毛、修剪指甲、清洁耳朵等，让您的宠物保持整洁健康。
+                        </p>
+                        <a href="#" class="font-varela font-bold text-cta hover:text-orange-500 transition-colors flex items-center">
+                            了解更多 <i class="fa fa-arrow-right ml-2"></i>
+                        </a>
+                    </div>
+                    
+                    <!-- 服务卡片 4 -->
+                    <div class="claymorphism p-8 rounded-2xl hover-lift">
+                        <div class="claymorphism w-16 h-16 flex items-center justify-center bg-blue-100 mb-6">
+                            <i class="fa fa-calendar-check-o text-primary text-2xl"></i>
+                        </div>
+                        <h3 class="font-varela text-xl font-bold text-primary mb-4">疫苗接种</h3>
+                        <p class="text-gray-600 mb-6">
+                            按照宠物年龄和健康状况，提供全面的疫苗接种计划，预防各种传染病。
+                        </p>
+                        <a href="#" class="font-varela font-bold text-cta hover:text-orange-500 transition-colors flex items-center">
+                            了解更多 <i class="fa fa-arrow-right ml-2"></i>
+                        </a>
+                    </div>
+                    
+                    <!-- 服务卡片 5 -->
+                    <div class="claymorphism p-8 rounded-2xl hover-lift">
+                        <div class="claymorphism w-16 h-16 flex items-center justify-center bg-blue-100 mb-6">
+                            <i class="fa fa-pills text-primary text-2xl"></i>
+                        </div>
+                        <h3 class="font-varela text-xl font-bold text-primary mb-4">宠物药品</h3>
+                        <p class="text-gray-600 mb-6">
+                            提供各种宠物专用药品和保健品，包括处方药、营养补充剂、驱虫药等。
+                        </p>
+                        <a href="#" class="font-varela font-bold text-cta hover:text-orange-500 transition-colors flex items-center">
+                            了解更多 <i class="fa fa-arrow-right ml-2"></i>
+                        </a>
+                    </div>
+                    
+                    <!-- 服务卡片 6 -->
+                    <div class="claymorphism p-8 rounded-2xl hover-lift">
+                        <div class="claymorphism w-16 h-16 flex items-center justify-center bg-blue-100 mb-6">
+                            <i class="fa fa-car text-primary text-2xl"></i>
+                        </div>
+                        <h3 class="font-varela text-xl font-bold text-primary mb-4">上门服务</h3>
+                        <p class="text-gray-600 mb-6">
+                            为行动不便的宠物提供上门医疗服务，包括体检、疫苗接种、简单治疗等。
+                        </p>
+                        <a href="#" class="font-varela font-bold text-cta hover:text-orange-500 transition-colors flex items-center">
+                            了解更多 <i class="fa fa-arrow-right ml-2"></i>
+                        </a>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- 兽医团队展示 -->
+        <section id="team" class="py-20 px-4 md:px-8">
+            <div class="max-w-7xl mx-auto">
+                <div class="text-center mb-16">
+                    <h2 class="font-varela text-3xl md:text-4xl font-bold text-primary text-shadow mb-4">
+                        我们的兽医团队
+                    </h2>
+                    <p class="text-lg text-gray-600 max-w-3xl mx-auto">
+                        由经验丰富的兽医组成的专业团队，致力于为您的爱宠提供最优质的医疗护理。
+                    </p>
+                </div>
+                
+                <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-8">
+                    <!-- 团队成员 1 -->
+                    <div class="claymorphism p-6 rounded-2xl hover-lift">
+                        <div class="claymorphism w-48 h-48 mx-auto mb-6 overflow-hidden rounded-2xl">
+                            <img src="https://trae-api-cn.mchost.guru/api/ide/v1/text_to_image?prompt=professional%20female%20veterinarian%20portrait%20smiling&image_size=square" alt="张医生" class="w-full h-full object-cover">
+                        </div>
+                        <h3 class="font-varela text-xl font-bold text-primary mb-2 text-center">张医生</h3>
+                        <p class="text-gray-600 mb-4 text-center">首席兽医</p>
+                        <p class="text-sm text-gray-600 mb-6 text-center">
+                            拥有10年宠物医疗经验，擅长小动物内科和外科手术。
+                        </p>
+                        <div class="flex justify-center space-x-4">
+                            <a href="#" class="claymorphism w-10 h-10 flex items-center justify-center text-primary hover:text-cta transition-colors">
+                                <i class="fa fa-weixin"></i>
+                            </a>
+                            <a href="#" class="claymorphism w-10 h-10 flex items-center justify-center text-primary hover:text-cta transition-colors">
+                                <i class="fa fa-weibo"></i>
+                            </a>
+                            <a href="#" class="claymorphism w-10 h-10 flex items-center justify-center text-primary hover:text-cta transition-colors">
+                                <i class="fa fa-envelope"></i>
+                            </a>
+                        </div>
+                    </div>
+                    
+                    <!-- 团队成员 2 -->
+                    <div class="claymorphism p-6 rounded-2xl hover-lift">
+                        <div class="claymorphism w-48 h-48 mx-auto mb-6 overflow-hidden rounded-2xl">
+                            <img src="https://trae-api-cn.mchost.guru/api/ide/v1/text_to_image?prompt=professional%20male%20veterinarian%20portrait%20confident&image_size=square" alt="李医生" class="w-full h-full object-cover">
+                        </div>
+                        <h3 class="font-varela text-xl font-bold text-primary mb-2 text-center">李医生</h3>
+                        <p class="text-gray-600 mb-4 text-center">外科专家</p>
+                        <p class="text-sm text-gray-600 mb-6 text-center">
+                            专注于宠物外科手术，尤其擅长骨科和软组织手术。
+                        </p>
+                        <div class="flex justify-center space-x-4">
+                            <a href="#" class="claymorphism w-10 h-10 flex items-center justify-center text-primary hover:text-cta transition-colors">
+                                <i class="fa fa-weixin"></i>
+                            </a>
+                            <a href="#" class="claymorphism w-10 h-10 flex items-center justify-center text-primary hover:text-cta transition-colors">
+                                <i class="fa fa-weibo"></i>
+                            </a>
+                            <a href="#" class="claymorphism w-10 h-10 flex items-center justify-center text-primary hover:text-cta transition-colors">
+                                <i class="fa fa-envelope"></i>
+                            </a>
+                        </div>
+                    </div>
+                    
+                    <!-- 团队成员 3 -->
+                    <div class="claymorphism p-6 rounded-2xl hover-lift">
+                        <div class="claymorphism w-48 h-48 mx-auto mb-6 overflow-hidden rounded-2xl">
+                            <img src="https://trae-api-cn.mchost.guru/api/ide/v1/text_to_image?prompt=professional%20female%20veterinarian%20portrait%20friendly&image_size=square" alt="王医生" class="w-full h-full object-cover">
+                        </div>
+                        <h3 class="font-varela text-xl font-bold text-primary mb-2 text-center">王医生</h3>
+                        <p class="text-gray-600 mb-4 text-center">皮肤科专家</p>
+                        <p class="text-sm text-gray-600 mb-6 text-center">
+                            专注于宠物皮肤疾病的诊断和治疗，拥有丰富的临床经验。
+                        </p>
+                        <div class="flex justify-center space-x-4">
+                            <a href="#" class="claymorphism w-10 h-10 flex items-center justify-center text-primary hover:text-cta transition-colors">
+                                <i class="fa fa-weixin"></i>
+                            </a>
+                            <a href="#" class="claymorphism w-10 h-10 flex items-center justify-center text-primary hover:text-cta transition-colors">
+                                <i class="fa fa-weibo"></i>
+                            </a>
+                            <a href="#" class="claymorphism w-10 h-10 flex items-center justify-center text-primary hover:text-cta transition-colors">
+                                <i class="fa fa-envelope"></i>
+                            </a>
+                        </div>
+                    </div>
+                    
+                    <!-- 团队成员 4 -->
+                    <div class="claymorphism p-6 rounded-2xl hover-lift">
+                        <div class="claymorphism w-48 h-48 mx-auto mb-6 overflow-hidden rounded-2xl">
+                            <img src="https://trae-api-cn.mchost.guru/api/ide/v1/text_to_image?prompt=professional%20male%20veterinarian%20portrait%20young&image_size=square" alt="赵医生" class="w-full h-full object-cover">
+                        </div>
+                        <h3 class="font-varela text-xl font-bold text-primary mb-2 text-center">赵医生</h3>
+                        <p class="text-gray-600 mb-4 text-center">营养师</p>
+                        <p class="text-sm text-gray-600 mb-6 text-center">
+                            专注于宠物营养和健康管理，为宠物提供个性化的饮食方案。
+                        </p>
+                        <div class="flex justify-center space-x-4">
+                            <a href="#" class="claymorphism w-10 h-10 flex items-center justify-center text-primary hover:text-cta transition-colors">
+                                <i class="fa fa-weixin"></i>
+                            </a>
+                            <a href="#" class="claymorphism w-10 h-10 flex items-center justify-center text-primary hover:text-cta transition-colors">
+                                <i class="fa fa-weibo"></i>
+                            </a>
+                            <a href="#" class="claymorphism w-10 h-10 flex items-center justify-center text-primary hover:text-cta transition-colors">
+                                <i class="fa fa-envelope"></i>
+                            </a>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- 宠物健康知识博客部分 -->
+        <section id="blog" class="py-20 px-4 md:px-8 bg-gradient-to-b from-blue-50 to-background">
+            <div class="max-w-7xl mx-auto">
+                <div class="text-center mb-16">
+                    <h2 class="font-varela text-3xl md:text-4xl font-bold text-primary text-shadow mb-4">
+                        宠物健康知识
+                    </h2>
+                    <p class="text-lg text-gray-600 max-w-3xl mx-auto">
+                        了解更多关于宠物健康的知识，帮助您更好地照顾您的爱宠。
+                    </p>
+                </div>
+                
+                <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+                    <!-- 博客卡片 1 -->
+                    <div class="claymorphism rounded-2xl overflow-hidden hover-lift">
+                        <div class="claymorphism h-48 overflow-hidden">
+                            <img src="https://trae-api-cn.mchost.guru/api/ide/v1/text_to_image?prompt=dog%20nutrition%20healthy%20food&image_size=landscape_4_3" alt="宠物饮食" class="w-full h-full object-cover">
+                        </div>
+                        <div class="p-6">
+                            <div class="flex items-center space-x-2 mb-4">
+                                <span class="claymorphism px-4 py-1 text-sm text-primary">宠物饮食</span>
+                                <span class="text-gray-500 text-sm">2024-01-15</span>
+                            </div>
+                            <h3 class="font-varela text-xl font-bold text-primary mb-3">
+                                如何为您的宠物选择健康的饮食
+                            </h3>
+                            <p class="text-gray-600 mb-6">
+                                不同年龄、品种和健康状况的宠物需要不同的饮食方案，本文将为您提供详细的指导。
+                            </p>
+                            <a href="#" class="font-varela font-bold text-cta hover:text-orange-500 transition-colors flex items-center">
+                                阅读更多 <i class="fa fa-arrow-right ml-2"></i>
+                            </a>
+                        </div>
+                    </div>
+                    
+                    <!-- 博客卡片 2 -->
+                    <div class="claymorphism rounded-2xl overflow-hidden hover-lift">
+                        <div class="claymorphism h-48 overflow-hidden">
+                            <img src="https://trae-api-cn.mchost.guru/api/ide/v1/text_to_image?prompt=cat%20exercise%20playful&image_size=landscape_4_3" alt="宠物运动" class="w-full h-full object-cover">
+                        </div>
+                        <div class="p-6">
+                            <div class="flex items-center space-x-2 mb-4">
+                                <span class="claymorphism px-4 py-1 text-sm text-primary">宠物护理</span>
+                                <span class="text-gray-500 text-sm">2024-01-10</span>
+                            </div>
+                            <h3 class="font-varela text-xl font-bold text-primary mb-3">
+                                如何让您的宠物保持适当的运动
+                            </h3>
+                            <p class="text-gray-600 mb-6">
+                                适当的运动对宠物的健康至关重要，本文将为您提供不同类型宠物的运动建议。
+                            </p>
+                            <a href="#" class="font-varela font-bold text-cta hover:text-orange-500 transition-colors flex items-center">
+                                阅读更多 <i class="fa fa-arrow-right ml-2"></i>
+                            </a>
+                        </div>
+                    </div>
+                    
+                    <!-- 博客卡片 3 -->
+                    <div class="claymorphism rounded-2xl overflow-hidden hover-lift">
+                        <div class="claymorphism h-48 overflow-hidden">
+                            <img src="https://trae-api-cn.mchost.guru/api/ide/v1/text_to_image?prompt=pet%20vaccination%20clinic&image_size=landscape_4_3" alt="宠物疫苗" class="w-full h-full object-cover">
+                        </div>
+                        <div class="p-6">
+                            <div class="flex items-center space-x-2 mb-4">
+                                <span class="claymorphism px-4 py-1 text-sm text-primary">宠物医疗</span>
+                                <span class="text-gray-500 text-sm">2024-01-05</span>
+                            </div>
+                            <h3 class="font-varela text-xl font-bold text-primary mb-3">
+                                宠物疫苗接种全指南
+                            </h3>
+                            <p class="text-gray-600 mb-6">
+                                了解宠物需要接种哪些疫苗，以及接种的时间和注意事项。
+                            </p>
+                            <a href="#" class="font-varela font-bold text-cta hover:text-orange-500 transition-colors flex items-center">
+                                阅读更多 <i class="fa fa-arrow-right ml-2"></i>
+                            </a>
+                        </div>
+                    </div>
+                </div>
+                
+                <div class="text-center mt-12">
+                    <a href="#" class="claymorphism px-8 py-4 font-varela font-bold text-primary hover:bg-gray-100 transition-colors inline-block">
+                        查看更多文章 <i class="fa fa-arrow-right ml-2"></i>
+                    </a>
+                </div>
+            </div>
+        </section>
+
+        <!-- 联系我们区域 -->
+        <section id="contact" class="py-20 px-4 md:px-8">
+            <div class="max-w-7xl mx-auto">
+                <div class="text-center mb-16">
+                    <h2 class="font-varela text-3xl md:text-4xl font-bold text-primary text-shadow mb-4">
+                        联系我们
+                    </h2>
+                    <p class="text-lg text-gray-600 max-w-3xl mx-auto">
+                        如果您有任何问题或需要预约，请随时联系我们，我们将尽快回复您。
+                    </p>
+                </div>
+                
+                <div class="flex flex-col lg:flex-row space-y-12 lg:space-y-0 lg:space-x-12">
+                    <!-- 联系信息 -->
+                    <div class="lg:w-1/2">
+                        <div class="claymorphism p-8 rounded-2xl h-full">
+                            <h3 class="font-varela text-2xl font-bold text-primary mb-6">
+                                联系方式
+                            </h3>
+                            
+                            <div class="space-y-6">
+                                <!-- 地址 -->
+                                <div class="flex items-start space-x-4">
+                                    <div class="claymorphism w-12 h-12 flex items-center justify-center bg-blue-100 flex-shrink-0">
+                                        <i class="fa fa-map-marker text-primary text-xl"></i>
+                                    </div>
+                                    <div>
+                                        <h4 class="font-varela font-bold text-primary mb-2">地址</h4>
+                                        <p class="text-gray-600">
+                                            北京市朝阳区建国路88号宠物医院大楼
+                                        </p>
+                                    </div>
+                                </div>
+                                
+                                <!-- 电话 -->
+                                <div class="flex items-start space-x-4">
+                                    <div class="claymorphism w-12 h-12 flex items-center justify-center bg-blue-100 flex-shrink-0">
+                                        <i class="fa fa-phone text-primary text-xl"></i>
+                                    </div>
+                                    <div>
+                                        <h4 class="font-varela font-bold text-primary mb-2">电话</h4>
+                                        <p class="text-gray-600">
+                                            010-12345678
+                                        </p>
+                                    </div>
+                                </div>
+                                
+                                <!-- 邮箱 -->
+                                <div class="flex items-start space-x-4">
+                                    <div class="claymorphism w-12 h-12 flex items-center justify-center bg-blue-100 flex-shrink-0">
+                                        <i class="fa fa-envelope text-primary text-xl"></i>
+                                    </div>
+                                    <div>
+                                        <h4 class="font-varela font-bold text-primary mb-2">邮箱</h4>
+                                        <p class="text-gray-600">
+                                            info@petcare.com
+                                        </p>
+                                    </div>
+                                </div>
+                                
+                                <!-- 营业时间 -->
+                                <div class="flex items-start space-x-4">
+                                    <div class="claymorphism w-12 h-12 flex items-center justify-center bg-blue-100 flex-shrink-0">
+                                        <i class="fa fa-clock-o text-primary text-xl"></i>
+                                    </div>
+                                    <div>
+                                        <h4 class="font-varela font-bold text-primary mb-2">营业时间</h4>
+                                        <p class="text-gray-600 mb-1">周一至周五: 9:00 - 20:00</p>
+                                        <p class="text-gray-600 mb-1">周六至周日: 9:00 - 18:00</p>
+                                        <p class="text-gray-600">节假日: 9:00 - 16:00</p>
+                                    </div>
+                                </div>
+                            </div>
+                            
+                            <!-- 地图 -->
+                            <div class="mt-8 claymorphism rounded-xl overflow-hidden">
+                                <img src="https://trae-api-cn.mchost.guru/api/ide/v1/text_to_image?prompt=veterinary%20clinic%20exterior%20modern%20building&image_size=landscape_4_3" alt="诊所位置" class="w-full h-64 object-cover">
+                            </div>
+                        </div>
+                    </div>
+                    
+                    <!-- 联系表单 -->
+                    <div class="lg:w-1/2">
+                        <div class="claymorphism p-8 rounded-2xl">
+                            <h3 class="font-varela text-2xl font-bold text-primary mb-6">
+                                发送消息
+                            </h3>
+                            
+                            <form id="contact-form" class="space-y-6">
+                                <div class="grid grid-cols-1 md:grid-cols-2 gap-6">
+                                    <div>
+                                        <label for="name" class="block font-varela font-medium text-primary mb-2">
+                                            您的姓名
+                                        </label>
+                                        <div class="claymorphism-inset">
+                                            <input type="text" id="name" name="name" class="w-full px-4 py-3 bg-transparent border-none focus:outline-none" placeholder="请输入您的姓名">
+                                        </div>
+                                    </div>
+                                    
+                                    <div>
+                                        <label for="phone" class="block font-varela font-medium text-primary mb-2">
+                                            联系电话
+                                        </label>
+                                        <div class="claymorphism-inset">
+                                            <input type="tel" id="phone" name="phone" class="w-full px-4 py-3 bg-transparent border-none focus:outline-none" placeholder="请输入您的联系电话">
+                                        </div>
+                                    </div>
+                                </div>
+                                
+                                <div>
+                                    <label for="email" class="block font-varela font-medium text-primary mb-2">
+                                        邮箱地址
+                                    </label>
+                                    <div class="claymorphism-inset">
+                                        <input type="email" id="email" name="email" class="w-full px-4 py-3 bg-transparent border-none focus:outline-none" placeholder="请输入您的邮箱地址">
+                                    </div>
+                                </div>
+                                
+                                <div>
+                                    <label for="subject" class="block font-varela font-medium text-primary mb-2">
+                                        主题
+                                    </label>
+                                    <div class="claymorphism-inset">
+                                        <input type="text" id="subject" name="subject" class="w-full px-4 py-3 bg-transparent border-none focus:outline-none" placeholder="请输入消息主题">
+                                    </div>
+                                </div>
+                                
+                                <div>
+                                    <label for="message" class="block font-varela font-medium text-primary mb-2">
+                                        消息内容
+                                    </label>
+                                    <div class="claymorphism-inset">
+                                        <textarea id="message" name="message" rows="5" class="w-full px-4 py-3 bg-transparent border-none focus:outline-none" placeholder="请输入您的消息内容"></textarea>
+                                    </div>
+                                </div>
+                                
+                                <button type="submit" class="claymorphism w-full py-4 font-varela font-bold text-white bg-cta hover:bg-orange-500 transition-colors">
+                                    发送消息
+                                </button>
+                            </form>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+
+        <!-- 预约就诊区域 -->
+        <section id="appointment" class="py-20 px-4 md:px-8 bg-gradient-to-b from-blue-50 to-background">
+            <div class="max-w-7xl mx-auto">
+                <div class="claymorphism p-8 md:p-12 rounded-2xl">
+                    <div class="flex flex-col md:flex-row items-center space-y-8 md:space-y-0 md:space-x-12">
+                        <div class="md:w-1/2">
+                            <h2 class="font-varela text-3xl md:text-4xl font-bold text-primary text-shadow mb-4">
+                                立即预约就诊
+                            </h2>
+                            <p class="text-lg text-gray-600 mb-6">
+                                填写以下信息预约就诊，我们将在24小时内与您联系确认。
+                            </p>
+                            <ul class="space-y-4 mb-8">
+                                <li class="flex items-center space-x-3">
+                                    <div class="claymorphism w-8 h-8 flex items-center justify-center bg-green-100">
+                                        <i class="fa fa-check text-green-500"></i>
+                                    </div>
+                                    <span class="text-gray-600">专业的兽医团队</span>
+                                </li>
+                                <li class="flex items-center space-x-3">
+                                    <div class="claymorphism w-8 h-8 flex items-center justify-center bg-green-100">
+                                        <i class="fa fa-check text-green-500"></i>
+                                    </div>
+                                    <span class="text-gray-600">先进的医疗设备</span>
+                                </li>
+                                <li class="flex items-center space-x-3">
+                                    <div class="claymorphism w-8 h-8 flex items-center justify-center bg-green-100">
+                                        <i class="fa fa-check text-green-500"></i>
+                                    </div>
+                                    <span class="text-gray-600">舒适的就诊环境</span>
+                                </li>
+                                <li class="flex items-center space-x-3">
+                                    <div class="claymorphism w-8 h-8 flex items-center justify-center bg-green-100">
+                                        <i class="fa fa-check text-green-500"></i>
+                                    </div>
+                                    <span class="text-gray-600">贴心的客户服务</span>
+                                </li>
+                            </ul>
+                        </div>
+                        
+                        <div class="md:w-1/2">
+                            <form id="appointment-form" class="space-y-6">
+                                <div>
+                                    <label for="pet-name" class="block font-varela font-medium text-primary mb-2">
+                                        宠物名称
+                                    </label>
+                                    <div class="claymorphism-inset">
+                                        <input type="text" id="pet-name" name="pet-name" class="w-full px-4 py-3 bg-transparent border-none focus:outline-none" placeholder="请输入宠物名称">
+                                    </div>
+                                </div>
+                                
+                                <div>
+                                    <label for="pet-type" class="block font-varela font-medium text-primary mb-2">
+                                        宠物类型
+                                    </label>
+                                    <div class="claymorphism-inset">
+                                        <select id="pet-type" name="pet-type" class="w-full px-4 py-3 bg-transparent border-none focus:outline-none">
+                                            <option value="">请选择宠物类型</option>
+                                            <option value="dog">狗</option>
+                                            <option value="cat">猫</option>
+                                            <option value="other">其他</option>
+                                        </select>
+                                    </div>
+                                </div>
+                                
+                                <div>
+                                    <label for="appointment-date" class="block font-varela font-medium text-primary mb-2">
+                                        预约日期
+                                    </label>
+                                    <div class="claymorphism-inset">
+                                        <input type="date" id="appointment-date" name="appointment-date" class="w-full px-4 py-3 bg-transparent border-none focus:outline-none">
+                                    </div>
+                                </div>
+                                
+                                <div>
+                                    <label for="appointment-time" class="block font-varela font-medium text-primary mb-2">
+                                        预约时间
+                                    </label>
+                                    <div class="claymorphism-inset">
+                                        <input type="time" id="appointment-time" name="appointment-time" class="w-full px-4 py-3 bg-transparent border-none focus:outline-none">
+                                    </div>
+                                </div>
+                                
+                                <div>
+                                    <label for="appointment-reason" class="block font-varela font-medium text-primary mb-2">
+                                        就诊原因
+                                    </label>
+                                    <div class="claymorphism-inset">
+                                        <textarea id="appointment-reason" name="appointment-reason" rows="3" class="w-full px-4 py-3 bg-transparent border-none focus:outline-none" placeholder="请简要描述就诊原因"></textarea>
+                                    </div>
+                                </div>
+                                
+                                <button type="submit" class="claymorphism w-full py-4 font-varela font-bold text-white bg-cta hover:bg-orange-500 transition-colors">
+                                    提交预约
+                                </button>
+                            </form>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </section>
+    </main>
+
+    <!-- 页脚 -->
+    <footer class="py-16 px-4 md:px-8 bg-gray-900 text-white">
+        <div class="max-w-7xl mx-auto">
+            <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-12">
+                <!-- 诊所信息 -->
+                <div>
+                    <div class="flex items-center space-x-3 mb-6">
+                        <div class="claymorphism w-12 h-12 flex items-center justify-center bg-white/10">
+                            <i class="fa fa-paw text-primary text-2xl"></i>
+                        </div>
+                        <div>
+                            <h3 class="font-varela text-2xl font-bold text-primary">PetCare</h3>
+                            <p class="text-sm text-gray-400">Veterinary Clinic</p>
+                        </div>
+                    </div>
+                    <p class="text-gray-400 mb-6">
+                        专业的宠物医疗服务，为您的爱宠提供全方位的健康保障。
+                    </p>
+                    <div class="flex space-x-4">
+                        <a href="#" class="claymorphism w-10 h-10 flex items-center justify-center bg-white/10 text-primary hover:text-cta transition-colors">
+                            <i class="fa fa-weixin"></i>
+                        </a>
+                        <a href="#" class="claymorphism w-10 h-10 flex items-center justify-center bg-white/10 text-primary hover:text-cta transition-colors">
+                            <i class="fa fa-weibo"></i>
+                        </a>
+                        <a href="#" class="claymorphism w-10 h-10 flex items-center justify-center bg-white/10 text-primary hover:text-cta transition-colors">
+                            <i class="fa fa-instagram"></i>
+                        </a>
+                        <a href="#" class="claymorphism w-10 h-10 flex items-center justify-center bg-white/10 text-primary hover:text-cta transition-colors">
+                            <i class="fa fa-facebook"></i>
+                        </a>
+                    </div>
+                </div>
+                
+                <!-- 快速链接 -->
+                <div>
+                    <h4 class="font-varela text-xl font-bold text-primary mb-6">
+                        快速链接
+                    </h4>
+                    <ul class="space-y-3">
+                        <li><a href="#home" class="text-gray-400 hover:text-primary transition-colors">首页</a></li>
+                        <li><a href="#services" class="text-gray-400 hover:text-primary transition-colors">服务</a></li>
+                        <li><a href="#team" class="text-gray-400 hover:text-primary transition-colors">团队</a></li>
+                        <li><a href="#blog" class="text-gray-400 hover:text-primary transition-colors">博客</a></li>
+                        <li><a href="#contact" class="text-gray-400 hover:text-primary transition-colors">联系我们</a></li>
+                        <li><a href="#appointment" class="text-gray-400 hover:text-primary transition-colors">预约就诊</a></li>
+                    </ul>
+                </div>
+                
+                <!-- 服务 -->
+                <div>
+                    <h4 class="font-varela text-xl font-bold text-primary mb-6">
+                        我们的服务
+                    </h4>
+                    <ul class="space-y-3">
+                        <li><a href="#" class="text-gray-400 hover:text-primary transition-colors">常规体检</a></li>
+                        <li><a href="#" class="text-gray-400 hover:text-primary transition-colors">疾病治疗</a></li>
+                        <li><a href="#" class="text-gray-400 hover:text-primary transition-colors">美容护理</a></li>
+                        <li><a href="#" class="text-gray-400 hover:text-primary transition-colors">疫苗接种</a></li>
+                        <li><a href="#" class="text-gray-400 hover:text-primary transition-colors">宠物药品</a></li>
+                        <li><a href="#" class="text-gray-400 hover:text-primary transition-colors">上门服务</a></li>
+                    </ul>
+                </div>
+                
+                <!-- 联系信息 -->
+                <div>
+                    <h4 class="font-varela text-xl font-bold text-primary mb-6">
+                        联系我们
+                    </h4>
+                    <ul class="space-y-4">
+                        <li class="flex items-start space-x-3">
+                            <i class="fa fa-map-marker text-primary mt-1"></i>
+                            <span class="text-gray-400">北京市朝阳区建国路88号宠物医院大楼</span>
+                        </li>
+                        <li class="flex items-center space-x-3">
+                            <i class="fa fa-phone text-primary"></i>
+                            <span class="text-gray-400">010-12345678</span>
+                        </li>
+                        <li class="flex items-center space-x-3">
+                            <i class="fa fa-envelope text-primary"></i>
+                            <span class="text-gray-400">info@petcare.com</span>
+                        </li>
+                        <li class="flex items-center space-x-3">
+                            <i class="fa fa-clock-o text-primary"></i>
+                            <span class="text-gray-400">周一至周日: 9:00 - 20:00</span>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+            
+            <div class="border-t border-gray-800 mt-12 pt-8 flex flex-col md:flex-row justify-between items-center">
+                <p class="text-gray-400 text-sm mb-4 md:mb-0">
+                    &copy; 2024 PetCare Veterinary Clinic. All rights reserved.
+                </p>
+                <div class="flex space-x-6">
+                    <a href="#" class="text-gray-400 hover:text-primary transition-colors text-sm">隐私政策</a>
+                    <a href="#" class="text-gray-400 hover:text-primary transition-colors text-sm">服务条款</a>
+                    <a href="#" class="text-gray-400 hover:text-primary transition-colors text-sm">网站地图</a>
+                </div>
+            </div>
+        </div>
+    </footer>
+
+    <!-- JavaScript -->
+    <script>
+        // 移动端菜单切换
+        document.getElementById('menu-toggle').addEventListener('click', function() {
+            const mobileMenu = document.getElementById('mobile-menu');
+            mobileMenu.classList.toggle('hidden');
+        });
+        
+        // 平滑滚动
+        document.querySelectorAll('a[href^="#"]').forEach(anchor => {
+            anchor.addEventListener('click', function (e) {
+                e.preventDefault();
+                
+                const targetId = this.getAttribute('href');
+                if (targetId === '#') return;
+                
+                const targetElement = document.querySelector(targetId);
+                if (targetElement) {
+                    // 关闭移动端菜单
+                    document.getElementById('mobile-menu').classList.add('hidden');
+                    
+                    // 计算滚动位置（考虑导航栏高度）
+                    const navHeight = 100;
+                    const targetPosition = targetElement.getBoundingClientRect().top + window.pageYOffset - navHeight;
+                    
+                    // 平滑滚动
+                    window.scrollTo({
+                        top: targetPosition,
+                        behavior: 'smooth'
+                    });
+                }
+            });
+        });
+        
+        // 表单提交处理
+        document.getElementById('contact-form')?.addEventListener('submit', function(e) {
+            e.preventDefault();
+            alert('消息已发送，我们将尽快回复您！');
+            this.reset();
+        });
+        
+        document.getElementById('appointment-form')?.addEventListener('submit', function(e) {
+            e.preventDefault();
+            alert('预约已提交，我们将在24小时内与您联系确认！');
+            this.reset();
+        });
+        
+        // 滚动时导航栏效果
+        window.addEventListener('scroll', function() {
+            const nav = document.querySelector('nav');
+            if (window.scrollY > 50) {
+                nav.classList.add('shadow-lg');
+            } else {
+                nav.classList.remove('shadow-lg');
+            }
+        });
+    </script>
+</body>
+</html>
